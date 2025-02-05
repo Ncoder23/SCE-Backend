@@ -1,0 +1,60 @@
+# Byte-compiled / optimized / package files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.venv/
+env/
+
+# Django specific files
+db.sqlite3
+media/
+staticfiles/
+*.log
+*.pot
+*.pyc
+
+# Environment variables & secrets
+.env
+config/settings/local.py
+config/settings/.env
+
+# Node.js (if using frontend with React)
+node_modules/
+
+# Migrations (optional: keep initial migrations tracked)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# VS Code settings
+.vscode/
+
+# MacOS & system files
+.DS_Store
+Thumbs.db
+
+# Pytest & coverage reports
+htmlcov/
+.coverage
+*.cover
+*.py,cover
+.cache
+.nox/
+*.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# MyPy type checker
+.mypy_cache/
+
+# Celery task queue
+celerybeat-schedule
+celerybeat.pid
+
+# Docker
+docker-compose.override.yml
+logs/
