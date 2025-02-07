@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-*-_zydvlgb^24!*)qgoj*a@_5sod_ozos@ho#w_yq3^f^@65f5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_ENV', 'development') == 'development'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1'] if DEBUG else [
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sce-api-com.onrender.com'] if DEBUG else [
     os.getenv('PRODUCTION_HOST', '*')]
 
 
