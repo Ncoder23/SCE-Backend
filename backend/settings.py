@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-*-_zydvlgb^24!*)qgoj*a@_5sod_ozos@ho#w_yq3^f^@65f5"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_ENV', 'development') == 'development'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1'] if DEBUG else [
+    os.getenv('PRODUCTION_HOST', '*')]
 
 
 # Application definition
@@ -85,22 +90,27 @@ WSGI_APPLICATION = "backend.wsgi.application"
 AUTH_USER_MODEL = 'users.CustomUser'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # }
-    # PostgreSQL Database Configuration
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sce_db',
-        'USER': 'sce_user',
-        'PASSWORD': '17182323',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+# Database configuration
+if DEBUG:
+    # Development database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'sce_db',
+            'USER': 'sce_user',
+            'PASSWORD': '17182323',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    # Production database
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.getenv("SUPERBASE_CONN_STRING")
+        )
+    }
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
