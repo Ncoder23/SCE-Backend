@@ -100,7 +100,7 @@ if DEBUG:
             'USER': 'sce_user',
             'PASSWORD': '17182323',
             'HOST': '127.0.0.1',
-            'PORT': '5432',
+            'PORT': '5431',
         }
     }
 else:
